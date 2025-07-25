@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Page Shaka Player with Plyr.js</title>
+    <!-- Include Shaka Player library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/shaka-player/4.5.0/shaka-player.compiled.js"></script>
+    <!-- Include Plyr.js -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+    <style>
+        /* Full-page styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #video {
+            width: 100%;
+            height: 100%;
+        }
+        :root {
+            --plyr-color-main: #f97316;
+        }
+    </style>
+</head>
+<body>
+    <video id="video" controls autoplay poster="https://i.ibb.co/LzZ4tXJF/bg.png"></video>
+
+    <script>
+        // Function to get the URL parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[$$]/, '\\[').replace(/[$$]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get the stream URL from the query parameter
+        const manifestUri = getUrlParameter('url') || ''; // Default URL if none provided
+
+        async function initApp() {
+            // Install built-in polyfills to patch browser incompatibilities.
+            shaka.polyfill.installAll();
+
+            // Check if the browser supports the required APIs.
+            if (shaka.Player.isBrowserSupported()) {
+                initPlayer();
+            } else {
+                alert('⚠️ Twoja przeglądarka nie obsługuje Shaka Player. Spróbuj otworzyć w innej przeglądarce.');
+            }
+        }
+
+        async function initPlayer() {
+            const video = document.getElementById('video');
+            const player = new shaka.Player(video);
+
+            // Initialize Plyr.js
+            const plyr = new Plyr(video);
+
+            // Listen for error events.
+            player.addEventListener('error', onErrorEvent);
+
+            // Try to load a manifest.
+            try {
+                await player.load(manifestUri);
+                console.log('The video has now been loaded!');
+            } catch (e) {
+                onError(e);
+            }
+        }
+
+        function onErrorEvent(event) {
+            onError(event.detail);
+        }
+
+        function onError(error) {
+            console.error('Error code', error.code, 'object', error);
+            alert('Wystąpił błąd: ' + error.code);
+        }
+
+        // Initialize the app
+        initApp();
+    </script>
+</body>
+</html>

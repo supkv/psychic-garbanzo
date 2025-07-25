@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolk.live - Telewizja Online</title>
+    <!-- Import Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Import czcionki Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Stylizacja dla paska przewijania */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d3748;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+        /* Podstawowy styl dla ciała strony */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Nagłówek -->
+    <header class="bg-gray-800/80 backdrop-blur-sm shadow-lg w-full fixed top-0 left-0 z-20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- Zaktualizowane logo -->
+                <svg class="w-8 h-8" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" rx="10" fill="#f97316"/>
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Inter, sans-serif" font-size="65" font-weight="bold" fill="white">W</text>
+                </svg>
+                <!-- Zaktualizowane kolory tekstu -->
+                <a href="#" class="text-2xl font-bold text-orange-500"><span class="text-white">wolk.live</span></a>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-orange-500 font-semibold">Główna</a>
+                <a href="channels" class="text-gray-300 hover:text-orange-500 transition duration-300">Kanały</a>
+                <a href="info" class="text-gray-300 hover:text-orange-500 transition duration-300">Informacje</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Menu mobilne -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <a href="/" class="block py-2 px-6 text-orange-500 font-semibold bg-gray-900">Główna</a>
+            <a href="channels" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Kanały</a>
+            <a href="/info" class="block py-2 px-6 text-gray-300 hover:bg-gray-700">Informacje</a>
+        </div>
+    </header>
+
+    <!-- Główna zawartość strony domowej -->
+    <main class="flex-1 flex flex-col items-center justify-center pt-20 md:pt-24 pb-8 container mx-auto px-4 sm:px-6">
+        <!-- Sekcja Hero -->
+        <section class="text-center py-16 md:py-24 bg-gradient-to-r from-gray-900 to-gray-800 rounded-xl shadow-lg w-full max-w-4xl mb-12">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-orange-500 mb-6 leading-tight animate-fade-in-down">
+                Twoja Telewizja Online
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto animate-fade-in">
+                Oglądaj swoje ulubione kanały, muzykę i wiadomości na żywo, kiedykolwiek i gdziekolwiek chcesz.
+            </p>
+            <a href="channels" class="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-xl">
+                Rozpocznij Oglądanie Teraz!
+            </a>
+        </section>
+
+        <!-- Sekcja z wyróżnionymi kanałami (przykładowe) -->
+        <section class="w-full max-w-4xl mb-12">
+            <h2 class="text-3xl font-bold text-white text-center mb-8">Wyróżnione Kanały</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Karta kanału 1 -->
+                <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="https://placehold.co/150x150/ffffff/f97316?text=4FUN" alt="4FUN TV Logo" class="w-24 h-24 mx-auto mb-4 rounded-md object-contain bg-white p-2">
+                    <h3 class="text-xl font-semibold text-orange-500 mb-2">4FUN TV</h3>
+                    <p class="text-gray-400 text-sm">Muzyka, hity i rozrywka na najwyższym poziomie.</p>
+                </div>
+                <!-- Karta kanału 2 -->
+                <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="https://placehold.co/150x150/ffffff/f97316?text=ESKA+HITY" alt="Eska Hity Na Czasie Logo" class="w-24 h-24 mx-auto mb-4 rounded-md object-contain bg-white p-2">
+                    <h3 class="text-xl font-semibold text-orange-500 mb-2">Eska Hity Na Czasie</h3>
+                    <p class="text-gray-400 text-sm">Twoje ulubione, najnowsze hity prosto z radia Eska.</p>
+                </div>
+                <!-- Karta kanału 3 -->
+                <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="https://placehold.co/150x150/ffffff/f97316?text=TVP+Info" alt="TVP Info Logo" class="w-24 h-24 mx-auto mb-4 rounded-md object-contain bg-white p-2">
+                    <h3 class="text-xl font-semibold text-orange-500 mb-2">TVP Info</h3>
+                    <p class="text-gray-400 text-sm">Wiadomości i publicystyka na żywo.</p>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="channels" class="inline-block text-orange-500 hover:text-orange-400 font-semibold transition duration-300">Zobacz wszystkie kanały &rarr;</a>
+            </div>
+        </section>
+
+        <!-- Sekcja "Dlaczego Wolk.live?" -->
+        <section class="w-full max-w-4xl mb-12">
+            <h2 class="text-3xl font-bold text-white text-center mb-8">Dlaczego Wybrać Wolk.live?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg">
+                    <svg class="w-12 h-12 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9.75 9L14.25 12.75L9.75 17Z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"></path></svg>
+                    <h3 class="text-xl font-semibold text-white mb-2">Szeroki Wybór Kanałów</h3>
+                    <p class="text-gray-400 text-sm">Dostęp do różnorodnych kanałów muzycznych, informacyjnych i rozrywkowych.</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg">
+                    <svg class="w-12 h-12 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.333 0 2.5.895 2.5 2V13a2 2 0 01-2 2h-1a2 2 0 01-2-2V10c0-1.105 1.167-2 2.5-2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 21a9 9 0 100-18 9 9 0 000 18z"></path></svg>
+                    <h3 class="text-xl font-semibold text-white mb-2">Łatwy Dostęp</h3>
+                    <p class="text-gray-400 text-sm">Oglądaj na dowolnym urządzeniu, bez dodatkowych aplikacji czy rejestracji.</p>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-6 text-center shadow-lg">
+                    <svg class="w-12 h-12 text-orange-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16v4m-2-2h4m5 16v4m-2-2h4M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="text-xl font-semibold text-white mb-2">Zawsze Na Czasie</h3>
+                    <p class="text-gray-400 text-sm">Bądź na bieżąco z najnowszymi wydarzeniami i trendami muzycznymi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekcja z wezwaniem do akcji (ponownie) -->
+        <section class="text-center py-12 px-6 bg-gray-900 rounded-xl shadow-lg w-full max-w-4xl">
+            <h2 class="text-3xl font-bold text-orange-500 mb-4">Gotowy na oglądanie?</h2>
+            <p class="text-lg text-gray-300 mb-6">Dołącz do Wolk.live i ciesz się niekończącą się rozrywką.</p>
+            <a href="channels" class="inline-block bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-xl">
+                Oglądaj teraz!
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Stopka -->
+    <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
+        <div class="container mx-auto px-6 text-center text-sm">
+            <p>&copy; 2025 Wolk.live. Wszelkie prawa zastrzeżone.</p>
+            <p class="mt-2">
+                <a href="#" class="hover:text-orange-500 mx-2">Polityka Prywatności</a> | 
+                <a href="#" class="hover:text-orange-500 mx-2">Warunki Korzystania</a>
+            </p>
+        </div>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obsługa menu mobilnego (przeniesiona z poprzedniego pliku)
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ostrzeżenie</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Apply Inter font to the entire body */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<!-- Body with dark background, light text, centered content, and padding for responsiveness -->
+<body class="bg-gray-900 text-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main warning box container -->
+    <div class="warning-box bg-gray-800 p-8 rounded-xl shadow-2xl max-w-lg w-full text-center border border-yellow-500">
+        <!-- Warning icon (emoji for simplicity and wide compatibility) -->
+        <div class="text-yellow-400 text-6xl mb-4">
+            ⚠️
+        </div>
+        <!-- Main heading for the warning -->
+        <h1 class="text-4xl font-extrabold mb-4 text-yellow-400">
+            Stream zawiera wyskakujące okienka!
+        </h1>
+        <!-- Detailed warning message -->
+        <p class="text-lg mb-6 text-gray-300">
+            Ten embed został znaleziony publicznie w internecie i może zawierać liczne reklamy.<br>
+            Dla lepszego komfortu przeglądania zalecamy korzystanie z AdBlockera.
+        </p>
+        <!-- Button to proceed -->
+        <button id="continueBtn" class="btn bg-yellow-600 hover:bg-yellow-700 text-gray-900 font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75">
+            Przejdź dalej
+        </button>
+    </div>
+
+    <!-- Custom Alert Modal (hidden by default) -->
+    <div id="customAlertModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden z-50">
+        <div class="bg-gray-800 p-8 rounded-xl shadow-2xl max-w-sm w-full text-center border border-yellow-500">
+            <!-- Alert title -->
+            <h2 id="alertTitle" class="text-2xl font-bold mb-4 text-yellow-400"></h2>
+            <!-- Alert message content -->
+            <p id="alertMessage" class="text-gray-300 mb-6"></p>
+            <!-- Close button for the alert -->
+            <button id="alertCloseBtn" class="btn bg-yellow-600 hover:bg-yellow-700 text-gray-900 font-semibold py-2 px-6 rounded-lg transition-colors duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-75">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Get references to the custom modal elements
+        const customAlertModal = document.getElementById('customAlertModal');
+        const alertTitle = document.getElementById('alertTitle');
+        const alertMessage = document.getElementById('alertMessage');
+        const alertCloseBtn = document.getElementById('alertCloseBtn');
+
+        /**
+         * Displays a custom alert modal with a given title and message.
+         * @param {string} title - The title to display in the alert.
+         * @param {string} message - The message to display in the alert.
+         */
+        function showAlert(title, message) {
+            alertTitle.textContent = title; // Set the title text
+            alertMessage.textContent = message; // Set the message text
+            customAlertModal.classList.remove('hidden'); // Make the modal visible
+        }
+
+        // Event listener for the "OK" button in the custom alert modal
+        alertCloseBtn.addEventListener('click', function() {
+            customAlertModal.classList.add('hidden'); // Hide the modal when "OK" is clicked
+        });
+
+        // Event listener for the main "Przejdź dalej" button
+        document.getElementById('continueBtn').addEventListener('click', function() {
+            // Get URL parameters from the current window location
+            const params = new URLSearchParams(window.location.search);
+            const targetUrl = params.get('url'); // Get the 'url' parameter
+
+            if (targetUrl) {
+                // Security check: Only allow redirection to URLs starting with "//"
+                // This helps prevent open redirect vulnerabilities by ensuring the URL is protocol-relative.
+                if (targetUrl.startsWith('//')) {
+                    window.location.href = targetUrl; // Redirect to the target URL
+                } else {
+                    // Show a custom alert if the URL format is invalid
+                    showAlert('Błąd', 'Nieprawidłowy adres URL. Adres URL musi zaczynać się od "//".');
+                }
+            } else {
+                // Show a custom alert if no target URL is provided in the parameters
+                showAlert('Błąd', 'Brak adresu URL do przekierowania w parametrach.');
+            }
+        });
+    </script>
+</body>
+</html>

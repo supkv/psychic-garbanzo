@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HLS Player - Pełnoekranowy</title>
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+      font-family: 'Inter', sans-serif;
+      color: white;
+    }
+
+    #player-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #custom-label {
+      position: absolute;
+      bottom: 50px;
+      left: 10px;
+      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .plyr--controls-visible + #custom-label {
+      display: block;
+    }
+
+    #error-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+      display: none;
+    }
+
+    :root {
+      --plyr-color-main: #f97316;
+    }
+  </style>
+</head>
+<body>
+  <div id="player-container">
+    <video id="player" poster="https://i.ibb.co/LzZ4tXJF/bg.png" controls></video>
+    <div id="custom-label">wolk.live</div>
+    <div id="error-screen" role="alert"></div>
+  </div>
+
+  <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const video = document.getElementById("player");
+      const customLabel = document.getElementById("custom-label");
+      const errorScreen = document.getElementById("error-screen");
+
+      const getUrlParameter = (name) => {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      };
+
+      const streamUrl = getUrlParameter('url');
+
+      if (!streamUrl) {
+        showError("Brak parametru 'url' w adresie.");
+        return;
+      }
+
+      function showError(message) {
+        errorScreen.textContent = `Błąd: ${message}`;
+        errorScreen.style.display = "flex";
+      }
+
+      const player = new Plyr(video, {
+        controls: [
+          "play", "progress", "current-time", "mute", "volume", "settings", "fullscreen"
+        ],
+        settings: ["quality", "speed"],
+      });
+
+      // Obsługa HLS
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(streamUrl);
+        hls.attachMedia(video);
+
+        hls.on(Hls.Events.ERROR, function (event, data) {
+          if (data.fatal) {
+            showError("Nie można odtworzyć strumienia: " + data.details);
+            hls.destroy();
+          }
+        });
+
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().catch(() => {
+//            showError("Nie udało się automatycznie odtworzyć wideo.");
+          });
+        });
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = streamUrl;
+        video.addEventListener("loadedmetadata", () => {
+          video.play().catch(() => {
+//            showError("Nie udało się automatycznie odtworzyć wideo.");
+          });
+        });
+      } else {
+        showError("Twoja przeglądarka nie obsługuje HLS.");
+      }
+
+      // Znak wodny tylko poza wolk.live
+      if (window.location.hostname === "wolk.live") {
+        customLabel.style.display = "none";
+      }
+
+      player.on("controlsshown", () => {
+        if (window.location.hostname !== "wolk.live") {
+          customLabel.style.display = "block";
+        }
+      });
+
+      player.on("controlshidden", () => {
+        customLabel.style.display = "none";
+      });
+    });
+  </script>
+</body>
+</html>

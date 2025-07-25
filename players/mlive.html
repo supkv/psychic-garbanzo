@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wybieracz stron</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #1a1a1a;
+      font-family: sans-serif;
+    }
+
+    .iframe-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .switch-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #cc5500;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+
+    .iframe-container:hover .switch-btn {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="iframe-container" id="iframeContainer">
+  <button class="switch-btn" id="switchBtn">Nie działa? Przełącz player</button>
+  <iframe id="mainIframe" src="https://wolk.live/player-hls.html?url=https://fl3.moveonjoy.com/MTV_LIVE/index.m3u8"></iframe>
+</div>
+
+<script>
+  const iframe = document.getElementById("mainIframe");
+  const button = document.getElementById("switchBtn");
+  const container = document.getElementById("iframeContainer");
+
+  const sites = [
+    "https://wolk.live/player-hls.html?url=https://fl3.moveonjoy.com/MTV_LIVE/index.m3u8",
+    "https://wolk.live/player-hls.html?url=https://fl2.moveonjoy.com/MTV_LIVE/index.m3u8",
+    "https://wolk.live/player-hls.html?url=https://fl5.moveonjoy.com/MTV_LIVE/index.m3u8"
+  ];
+  let currentIndex = 0;
+
+  button.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % sites.length;
+    iframe.src = sites[currentIndex];
+  });
+
+  let hideTimeout;
+
+  container.addEventListener("mouseenter", () => {
+    button.style.opacity = 1;
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      button.style.opacity = 0;
+    }, 5000);
+  });
+
+  container.addEventListener("mousemove", () => {
+    button.style.opacity = 1;
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      button.style.opacity = 0;
+    }, 5000);
+  });
+</script>
+
+</body>
+</html>
