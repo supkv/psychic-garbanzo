@@ -20,7 +20,7 @@ const channels = [
         name: 'TVN',
         logo: 'https://placehold.co/150x150/ffffff/f97316?text=TVN',
         description: 'Popularny kanał rozrywkowy, informacyjny i filmowy.',
-        videoUrl: '//uwa5r.github.io/Time-Codes/Time-Player.html'
+        videoUrl: '//uwa5r.github.io/Time-Codes/Time-Player.html?vids=9319'
     },
 //    {
 //        id: 9006,
@@ -29,13 +29,13 @@ const channels = [
 //        description: 'Kanał telewizyjny oferujący różnorodne programy rozrywkowe, filmy, seriale oraz reality show, skierowany głównie do młodszej widowni.',
 //        videoUrl: 'https://wolk.live/player-hls.html?url=https://4-edge1-eu-west.picarto.tv/stream/hls/golive%2byalido1716/index.m3u8'
 //    },
-    {
-        id: 17,
-        name: 'Polsat',
-        logo: 'https://placehold.co/150x150/ffffff/f97316?text=Polsat',
-        description: 'Popularny kanał rozrywkowy, informacyjny i filmowy.',
-        videoUrl: '//ok.ru/videoembed/10017401151146?autoplay=1'
-    },
+//    {
+//        id: 17,
+//        name: 'Polsat',
+//        logo: 'https://placehold.co/150x150/ffffff/f97316?text=Polsat',
+//        description: 'Popularny kanał rozrywkowy, informacyjny i filmowy.',
+//        videoUrl: '//ok.ru/videoembed/10017401151146?autoplay=1'
+//    },
     // --- Kategoria: Muzyka ---
     {
         id: 14,
@@ -114,13 +114,13 @@ const channels = [
         description: 'Spirit TV to amerykański chrześcijański kanał muzyczny.',
         videoUrl: 'https://wolk.live/player-hls?url=https://cdnlive.myspirit.tv/LS-ATL-43240-2/index.m3u8'
     },
-    {
-        id: 5993,
-        name: 'MTV 90s (smotret.tv)',
-        logo: 'https://placehold.co/150x150/ffffff/f97316?text=MTV+Classic',
-        description: 'Kanał muzyczny z klasycznymi teledyskami i archiwalnymi programami MTV.',
-        videoUrl: 'https://smotret.tv/music/iframe/mtv-90s.php'
-    },
+//    {
+//        id: 5993,
+//        name: 'MTV 90s (smotret.tv)',
+//        logo: 'https://placehold.co/150x150/ffffff/f97316?text=MTV+Classic',
+//        description: 'Kanał muzyczny z klasycznymi teledyskami i archiwalnymi programami MTV.',
+//        videoUrl: 'https://smotret.tv/music/iframe/mtv-90s.php'
+//    },
     {
         id: 50,
         name: 'MTV 80s',
@@ -128,20 +128,20 @@ const channels = [
         description: 'Kanał muzyczny grający największe hity z lat 80-tych.',
         videoUrl: 'https://ok.ru/videoembed/7678732148279?nochat=1&autoplay=1'
     },
-    {
-        id: 51,
-        name: 'MTV 00s',
-        logo: 'https://placehold.co/150x150/ffffff/f97316?text=MTV+00s',
-        description: 'Kanał muzyczny grający największe hity z lat 2000-2009.',
-        videoUrl: 'https://wolk.live/warn?url=//balkantelevizija.net/iptv-panel/repository/mtv_00s.php'
-    },
-    {
-        id: 594593,
-        name: 'MTV 80s (smotret.tv)',
-        logo: 'https://placehold.co/150x150/ffffff/f97316?text=MTV+Classic',
-        description: 'Kanał muzyczny z klasycznymi teledyskami i archiwalnymi programami MTV.',
-        videoUrl: 'https://smotret.tv/music/iframes/mtv-80s.html'
-    },
+//    {
+//        id: 51,
+//        name: 'MTV 00s',
+//        logo: 'https://placehold.co/150x150/ffffff/f97316?text=MTV+00s',
+//        description: 'Kanał muzyczny grający największe hity z lat 2000-2009.',
+//        videoUrl: 'https://wolk.live/warn?url=//balkantelevizija.net/iptv-panel/repository/mtv_00s.php'
+//    },
+//    {
+//        id: 594593,
+//        name: 'MTV 80s (smotret.tv)',
+//        logo: 'https://placehold.co/150x150/ffffff/f97316?text=MTV+Classic',
+//        description: 'Kanał muzyczny z klasycznymi teledyskami i archiwalnymi programami MTV.',
+//        videoUrl: 'https://smotret.tv/music/iframes/mtv-80s.html'
+//    },
     {
         id: 52,
         name: 'MTV Live',
