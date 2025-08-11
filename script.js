@@ -20,7 +20,7 @@ const channels = [
         name: 'TVN',
         logo: 'https://placehold.co/150x150/ffffff/f97316?text=TVN',
         description: 'Popularny kanał rozrywkowy, informacyjny i filmowy.',
-        videoUrl: 'https://wolk.live/player-hls.html?url=https://dokko1new.newkso.ru/dokko1/premium565/mono.m3u8'
+        videoUrl: '//uwa5r.github.io/Time-Codes/Time-Player.html'
     },
 //    {
 //        id: 9006,
